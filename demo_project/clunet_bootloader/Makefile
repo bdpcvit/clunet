@@ -6,6 +6,7 @@ MCU_PROGRAMMER = m8
 PROGRAMMER_TYPE = avrisp2
 PROGRAMMER_PORT = usb
 BOOTSTART = 0x1C00
+SIZE = avr-size
 
 #MCU_TARGET     = at90s2313
 #MCU_TARGET     = at90s2333
@@ -74,11 +75,25 @@ LDFLAGS += -Wl,--section-start=.text=$(BOOTSTART)
 OBJCOPY        = avr-objcopy
 OBJDUMP        = avr-objdump
 
-all: $(PRG).elf lst text eeprom
+all: $(PRG).elf lst text eeprom sizeafter
 
 $(PRG).elf: $(OBJ)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
 
+    
+    
+HEXSIZE = $(SIZE) --target=$(FORMAT) $(PRG).hex
+ELFSIZE = $(SIZE) --mcu=$(MCU_TARGET) --format=avr $(PRG).elf
+
+sizebefore:
+	@if test -f $(PRG).elf; then echo; echo $(MSG_SIZE_BEFORE); $(ELFSIZE); \
+	2>/dev/null; echo; fi
+
+sizeafter:
+	@if test -f $(PRG).elf; then echo; echo $(MSG_SIZE_AFTER); $(ELFSIZE); \
+	2>/dev/null; echo; fi
+
+    
 # dependency:
 clunet_bootloader.o: clunet_bootloader.c defines.h clunet.h ../clunet_config.h ../defines.h bits.h
 clean:

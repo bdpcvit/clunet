@@ -9,6 +9,7 @@ CLUNET_FLASHER = D:/Soft/Soft/clunetflasher/clunetflasher.exe
 CLUNET_IP      = 10.13.0.254
 CLUNET_PORT    = 10009
 CLUNET_DEVICE_ID = 99
+SIZE = avr-size
 
 #MCU_TARGET     = at90s2313
 #MCU_TARGET     = at90s2333
@@ -75,12 +76,28 @@ override LDFLAGS       = -Wl,-Map,$(PRG).map
 OBJCOPY        = avr-objcopy
 OBJDUMP        = avr-objdump
 
-all: $(PRG).elf lst text eeprom
+all: $(PRG).elf lst text eeprom sizeafter
 
 $(PRG).elf: $(OBJ)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 # dependency:
+
+
+
+HEXSIZE = $(SIZE) --target=$(FORMAT) $(PRG).hex
+ELFSIZE = $(SIZE) --mcu=$(MCU_TARGET) --format=avr $(PRG).elf
+
+sizebefore:
+	@if test -f $(PRG).elf; then echo; echo $(MSG_SIZE_BEFORE); $(ELFSIZE); \
+	2>/dev/null; echo; fi
+
+sizeafter:
+	@if test -f $(PRG).elf; then echo; echo $(MSG_SIZE_AFTER); $(ELFSIZE); \
+	2>/dev/null; echo; fi
+
+    
+
 demo.o: demo.c
 
 clean:
