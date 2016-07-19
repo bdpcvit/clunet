@@ -4,8 +4,8 @@
  * Creation Date: 2012-11-08
  * License: DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
  */
- 
- #ifndef __clunet_config_h_included__
+
+#ifndef __clunet_config_h_included__
 #define __clunet_config_h_included__
 
 /* Device address (0-254) */
@@ -32,7 +32,7 @@
 /* Timer prescaler */
 #define CLUNET_TIMER_PRESCALER 64
 
-/* Custom T (T >= 8 && T <= 24). 
+/* Custom T (T >= 8 && T <= 24).
  T is frame unit size in timer ticks. Lower - faster, highter - more stable
  If not defined T will be calculated as ~64us based on CLUNET_TIMER_PRESCALER value
 */
@@ -40,7 +40,7 @@
 
 /* Timer initialization */
 #define CLUNET_TIMER_INIT {unset_bit4(TCCR2, WGM21, WGM20, COM21, COM20); /* Timer2, normal mode */ \
-	set_bit(TCCR2, CS22); unset_bit2(TCCR2, CS21, CS20); /* 64x prescaler */ }
+    set_bit(TCCR2, CS22); unset_bit2(TCCR2, CS21, CS20); /* 64x prescaler */ }
 
 /* Timer registers */
 #define CLUNET_TIMER_REG TCNT2
