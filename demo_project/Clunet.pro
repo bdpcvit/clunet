@@ -14,3 +14,6 @@ HEADERS += \
     defines.h \
     ../bits.h \
     ../clunet.h
+
+DISTFILES += \
+    ../README.md

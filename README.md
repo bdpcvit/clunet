@@ -21,7 +21,7 @@ Features:
 
 ![Sample schematic](images/sample-schematic.png)
 
-You need a pin with an external interrupt to read data and any other pin to send data. Transistor method is recommended. 
+You need a pin with an external interrupt to read data and any other pin to send data. Transistor method is recommended.
 
 
 ### Software part
@@ -60,25 +60,25 @@ Default configuration file is optimised for ATMEGA8 / 8MHz.
 Include "clunet.h" and create callback function to receive data:
 
     #include "clunet.h"
-    
+
     void data_received(unsigned char src_address, unsigned char dst_address, unsigned char command, char* data, unsigned char size)
     {
-    	/* your code here */
+        /* your code here */
     }
 
 Add initialization code and enable interrupts:
 
     int main (void)
     {
-    	clunet_init();
-    	clunet_set_on_data_received(data_received);	
-    	sei();
+        clunet_init();
+        clunet_set_on_data_received(data_received);
+        sei();
 
 Also you can use `clunet_set_on_data_received_sniff()` to set callback function which will receive all packets, not only for this device.
 
 Function to send data:
 
-	void clunet_send(unsigned char address, unsigned char prio, unsigned char command, char* data, unsigned char size);
+    void clunet_send(unsigned char address, unsigned char prio, unsigned char command, char* data, unsigned char size);
 
 * **address** - address of destination device or `CLUNET_BROADCAST_ADDRESS` for multicast
 * **prio** - packet priority:
@@ -92,16 +92,16 @@ Function to send data:
 
 Sample code:
 
-	char buffer[1];
-	buffer[0] = 1;
-	clunet_send(CLUNET_BROADCAST_ADDRESS, CLUNET_PRIORITY_MESSAGE, CLUNET_COMMAND_DEVICE_POWER_INFO, buffer, sizeof(buffer));
-	
-	while (clunet_ready_to_send()); // wait while sending, otherwise next call will replace output buffer
-	                                // clunet_ready_to_send() returns current task priority
-	                                // or 0 if output buffer is not busy
+    char buffer[1];
+    buffer[0] = 1;
+    clunet_send(CLUNET_BROADCAST_ADDRESS, CLUNET_PRIORITY_MESSAGE, CLUNET_COMMAND_DEVICE_POWER_INFO, buffer, sizeof(buffer));
 
-	char *hello = "Hello world!";
-	clunet_send(1, CLUNET_PRIORITY_INFO, 100, hello, strlen(hello));
+    while (clunet_ready_to_send()); // wait while sending, otherwise next call will replace output buffer
+                                    // clunet_ready_to_send() returns current task priority
+                                    // or 0 if output buffer is not busy
+
+    char *hello = "Hello world!";
+    clunet_send(1, CLUNET_PRIORITY_INFO, 100, hello, strlen(hello));
 
 
 #### Reserved commands
