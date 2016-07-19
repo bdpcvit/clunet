@@ -31,7 +31,7 @@ You will need one free 8-bit timer with `output compare match` interrupt.
 
 #### Configuration####
 
-Edit *clunet\_config.h* and change some values:
+Edit *clunet_config.h* and change some values:
 
 * **CLUNET\_DEVICE\_ID** - address of the device (0-254);
 * **CLUNET\_DEVICE\_NAME** - name of the device (optional);
