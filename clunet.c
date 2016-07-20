@@ -59,13 +59,16 @@ check_crc(const char* data, const uint8_t size)
       return crc;
 }
 
-static inline void
-clunet_data_received(const uint8_t src_address, const uint8_t dst_address, const uint8_t command, char* data, const uint8_t size)
+static inline void clunet_data_received(const uint8_t src_address,
+                                        const uint8_t dst_address,
+                                        const uint8_t command,
+                                        char* data,
+                                        const uint8_t size)
 {
     if (on_data_received_sniff)
         (*on_data_received_sniff)(src_address, dst_address, command, data, size);
 
-    if (src_address == CLUNET_DEVICE_ID) return;	// Игнорируем сообщения от самого себя!
+    if (src_address == CLUNET_DEVICE_ID) return;            // Игнорируем сообщения от самого себя!
 
     if ((dst_address != CLUNET_DEVICE_ID) &&
         (dst_address != CLUNET_BROADCAST_ADDRESS)) return;	// Игнорируем сообщения не для нас
