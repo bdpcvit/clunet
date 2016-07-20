@@ -8,6 +8,7 @@
 #ifndef __clunet_h_included__
 #define __clunet_h_included__
 
+#include <avr/iom8.h>
 #include <stdint.h>
 #include "bits.h"
 #include "clunet_config.h"

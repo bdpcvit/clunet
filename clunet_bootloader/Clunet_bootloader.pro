@@ -11,4 +11,5 @@ INCLUDEPATH += C:\WinAVR-20100110\avr\include
 HEADERS += \
     bits.h \
     clunet.h \
-    defines.h
+    defines.h \
+    clunet_config.h

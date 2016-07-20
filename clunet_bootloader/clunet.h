@@ -4,10 +4,11 @@
  * Creation Date: 2013-09-09
  * License: DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
  */
- 
+
 #ifndef __clunet_h_included__
 #define __clunet_h_included__
 
+#include <avr/iom8.h>
 #include "bits.h"
 #include "clunet_config.h"
 
@@ -131,7 +132,7 @@
 /* Запрашивает запись у домофона, подтверждает доставку или завершает передачу
  Если 4 байта, то это номер запрашиваемой записи
  Если 1 байт, то 1 в случае подтверждения получения пакета, 0 - завершение передачи */
- 
+
 #define CLUNET_COMMAND_INTERCOM_RECORD_DATA 0x1C
 /* Передаёт кусок записи с автоответчика. Первые 4 байта - номер записи, далее 4 байта - смещение от начала файла, всё далее - данные из файла */
 

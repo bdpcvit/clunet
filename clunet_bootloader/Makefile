@@ -95,7 +95,7 @@ sizeafter:
 
     
 # dependency:
-clunet_bootloader.o: clunet_bootloader.c defines.h clunet.h ../clunet_config.h ../defines.h bits.h
+clunet_bootloader.o: clunet_bootloader.c defines.h clunet.h clunet_config.h defines.h bits.h
 clean:
 	rm -rf *.o $(PRG).elf *.eps *.png *.pdf *.bak 
 	rm -rf *.lst *.map $(EXTRA_CLEAN_FILES)
